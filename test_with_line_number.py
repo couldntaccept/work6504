@@ -1,6 +1,6 @@
 import spacy
 
-nlp = spacy.load("en_core_web_sm")
+nlp = spacy.load("en_core_web_trf")
 
 text = (
         'frivolities of childhood, he had acquired the stability of a man, and\n '
@@ -297,6 +297,7 @@ text = (
 # Split the text by new lines
 lines = text.split('\n')
 
+type = []
 # Process each line
 for i, line in enumerate(lines):
     doc = nlp(line)
@@ -308,14 +309,16 @@ for i, line in enumerate(lines):
             entities.append([ent.start-1, ent.end-2, ent.text, ent.label_])
     for ent in entities:
         if ent != []:
-            print(len(ent))
             if len(ent) == 3:
                 print(f'({i}, {ent[0]}) - {ent[2]} = Line {i}: {ent}')
+                type.append(ent[2])
                 with open("result.txt", "a+") as f:
                     f.write(f'({i}, {ent[0]}) - {ent[2]} = Line {i}: {ent}\n')
             elif len(ent) == 4:
                 print(f'(({i}, {ent[0]}), {i}, {ent[1]})) - {ent[3]} = Line {i}: {ent}')
+                type.append(ent[3])
                 with open("result.txt", "a+") as f:
                         f.write(f'(({i}, {ent[0]}), ({i}, {ent[1]})) - {ent[3]} = Line {i}: {ent}\n')
             else:
                 print(ent)
+print(set(type))
