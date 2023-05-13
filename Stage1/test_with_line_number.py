@@ -313,7 +313,7 @@ for i, line in enumerate(lines):
                 print(f'({i}, {ent[0]}) - {ent[2]} = Line {i}: {ent}')
                 type.append(ent[2])
                 with open("result.txt", "a+") as f:
-                    f.write(f'({i}, {ent[0]}) - {ent[2]} = Line {i}: {ent}\n')
+                    f.write(f'(({i}, {ent[0]}), ({i}, {ent[0]})) - {ent[2]} = Line {i}: {ent}\n')
             elif len(ent) == 4:
                 print(f'(({i}, {ent[0]}), {i}, {ent[1]})) - {ent[3]} = Line {i}: {ent}')
                 type.append(ent[3])
